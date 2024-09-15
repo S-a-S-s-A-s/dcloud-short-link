@@ -13,11 +13,14 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- * @Title: JsonUtil
- * @Author sas
- * @Package work.etasas.util
- * @Date 2024/9/5 10:11
- */
+ * 小滴课堂,愿景：让技术不再难学
+ *
+ * @Description
+ * @Author 二当家小D
+ * @Remark 有问题直接联系我，源码-笔记-技术交流群
+ * @Version 1.0
+ **/
+
 @Slf4j
 public class JsonUtil {
 
@@ -47,7 +50,7 @@ public class JsonUtil {
 
     /**
      * 对象转为Json字符串
-     * @param obj
+     * @param data
      * @return
      */
     public static String obj2Json(Object obj) {
@@ -62,8 +65,8 @@ public class JsonUtil {
     }
     /**
      * json字符串转为对象
-     * @param jsonStr
-     * @param beanType
+     * @param str
+     * @param valueType
      * @return
      */
     public static <T> T json2Obj(String jsonStr, Class<T> beanType) {
@@ -98,7 +101,7 @@ public class JsonUtil {
 
     /**
      * 对象转为byte数组
-     * @param obj
+     * @param data
      * @return
      */
     public static byte[] obj2Bytes(Object obj) {
@@ -117,7 +120,7 @@ public class JsonUtil {
     /**
      * byte数组转为对象
      * @param byteArr
-     * @param beanType
+     * @param valueType
      * @return
      */
     public static <T> T bytes2Obj(byte[] byteArr, Class<T> beanType) {

@@ -8,18 +8,23 @@ import lombok.NoArgsConstructor;
 import work.etasas.enums.BizCodeEnum;
 
 /**
- * @Title: JsonData
- * @Author sas
- * @Package work.etasas.util
- * @Date 2024/9/5 9:20
- */
+ * 小滴课堂,愿景：让技术不再难学
+ *
+ * @Description
+ * @Author 二当家小D
+ * @Remark 有问题直接联系我，源码-笔记-技术交流群
+ * @Version 1.0
+ **/
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class JsonData {
+
     /**
      * 状态码 0 表示成功
      */
+
     private Integer code;
     /**
      * 数据
@@ -30,22 +35,22 @@ public class JsonData {
      */
     private String msg;
 
+
     /**
-     * 获取远程调用数据
-     * 注意事项：
-     * 支持多单词下划线专驼峰（序列化和反序列化）
+     *  获取远程调用数据
+     *  注意事项：
+     *      支持多单词下划线专驼峰（序列化和反序列化）
      *
      * @param typeReference
      * @param <T>
      * @return
      */
-    public <T> T getData(TypeReference<T> typeReference) {
-        return JSON.parseObject(JSON.toJSONString(data), typeReference);
+    public <T> T getData(TypeReference<T> typeReference){
+        return JSON.parseObject(JSON.toJSONString(data),typeReference);
     }
 
     /**
-     * 成功，不传⼊数据
-     *
+     * 成功，不传入数据
      * @return
      */
     public static JsonData buildSuccess() {
@@ -53,19 +58,16 @@ public class JsonData {
     }
 
     /**
-     * 成功，传⼊数据
-     *
+     *  成功，传入数据
      * @param data
      * @return
      */
-
     public static JsonData buildSuccess(Object data) {
         return new JsonData(0, data, null);
     }
 
     /**
-     * 失败，传⼊描述信息
-     *
+     * 失败，传入描述信息
      * @param msg
      * @return
      */
@@ -73,9 +75,10 @@ public class JsonData {
         return new JsonData(-1, null, msg);
     }
 
+
+
     /**
-     * ⾃定义状态码和错误信息
-     *
+     * 自定义状态码和错误信息
      * @param code
      * @param msg
      * @return
@@ -85,13 +88,11 @@ public class JsonData {
     }
 
     /**
-     * 传⼊枚举，返回信息
-     *
+     * 传入枚举，返回信息
      * @param codeEnum
      * @return
      */
-    public static JsonData buildResult(BizCodeEnum codeEnum) {
-        return JsonData.buildCodeAndMsg(codeEnum.getCode(), codeEnum
-                .getMessage());
+    public static JsonData buildResult(BizCodeEnum codeEnum){
+        return JsonData.buildCodeAndMsg(codeEnum.getCode(),codeEnum.getMessage());
     }
 }
