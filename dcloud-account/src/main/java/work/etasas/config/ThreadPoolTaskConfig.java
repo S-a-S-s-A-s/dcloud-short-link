@@ -21,19 +21,19 @@ public class ThreadPoolTaskConfig {
 
         //线程池创建的核心线程数，线程池维护线程的最少数量，即使没有任务需要执行，也会一直存活
         //如果设置allowCoreThreadTimeout=true(默认false）时，核心线程会超时关闭
-        executor.setCorePoolSize(10);
+        executor.setCorePoolSize(16);
 
         //最大线程池数量，当线程数>=corePoolsize，且任务队列已满时。线程池会创建新线程来处理任务
         //当线程数=maxPoolsize，且任务队列已满时，线程池会拒绝处理任务而抛出异常
         executor.setMaxPoolSize(64);
 
         //缓存队列 (阻塞队列)当核心线程数达到最大时，新任务会放在队列中排队等待执行
-        executor.setQueueCapacity(124);
+        executor.setQueueCapacity(1024);
 
         //当线程空闲时间达到keepAliveTime时，线程会退出，直到线程数量=corePoolSize
         //允许线程空闲时间60秒，当maxPoolSize的线程在空闲时间到达的时候销毁
         //如果allowCoreThreadTimeout=true，则会直到线程数量=0
-        executor.setKeepAliveSeconds(60);
+        executor.setKeepAliveSeconds(30);
 
         //spring提供的ThreadPoolTaskExecutor线程池，是有setThreadNamePrefix()方法的。
         //jdk提供的ThreadPoolExecutor线程池是没有setThreadNamePrefix()方法的

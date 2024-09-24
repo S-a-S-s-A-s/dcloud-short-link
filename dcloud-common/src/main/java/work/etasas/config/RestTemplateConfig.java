@@ -53,7 +53,7 @@ public class RestTemplateConfig {
 
         RequestConfig requestConfig = RequestConfig.custom()
                 //返回数据的超时时间
-                .setSocketTimeout(10000)
+                .setSocketTimeout(20000)
                 //连接上服务器的时间
                 .setConnectTimeout(10000)
                 //从连接池中获取连接的超时时间

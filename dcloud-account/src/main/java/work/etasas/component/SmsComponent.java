@@ -6,6 +6,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import work.etasas.config.SmsConfig;
@@ -29,6 +30,7 @@ public class SmsComponent {
     @Autowired
     private SmsConfig smsConfig;
 
+    @Async("accountThreadPool")
     public void send(String to, String templateId, String param) {
         long beginTime = CommonUtil.getCurrentTimestamp();
 

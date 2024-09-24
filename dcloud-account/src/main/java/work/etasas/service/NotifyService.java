@@ -5,8 +5,5 @@ package work.etasas.service;
  * @create 2024-09-15-9:12
  */
 public interface NotifyService {
-    /**
-     * 用于测试
-     */
-    void testSend();
+
 }
