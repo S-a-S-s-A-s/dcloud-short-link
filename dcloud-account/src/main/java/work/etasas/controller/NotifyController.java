@@ -3,10 +3,12 @@ package work.etasas.controller;
 import com.google.code.kaptcha.Producer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import work.etasas.service.NotifyService;
+import work.etasas.util.CommonUtil;
 import work.etasas.util.JsonData;
 
 import javax.imageio.ImageIO;
@@ -31,25 +33,39 @@ public class NotifyController {
     @Autowired
     private NotifyService notifyService;
 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    private static final long CAPTCHA_EXPIRE_TIME = 1000 * 10 * 60;
+
     @GetMapping("kaptcha")
     public void getKaptcha(HttpServletRequest request, HttpServletResponse response) {
         String text = kaptchaProducer.createText();
         log.info("验证码:{}", text);
 
-        //存储Redis 配置过期时间 TODO
+        //存储Redis 配置过期时间
+        redisTemplate.opsForValue().set(getKaptchaKey(request), text, CAPTCHA_EXPIRE_TIME, java.util.concurrent.TimeUnit.MILLISECONDS);
+
 
         BufferedImage bufferedImage = kaptchaProducer.createImage(text);
 
-        try {
-            ServletOutputStream outputStream = response.getOutputStream();
+        try(ServletOutputStream outputStream = response.getOutputStream()) {
             ImageIO.write(bufferedImage, "jpg", outputStream);
             outputStream.flush();
-            outputStream.close();
         } catch (IOException e) {
             log.error("获取流出错", e);
         }
 
 
+    }
+
+    private String getKaptchaKey(HttpServletRequest request) {
+        String ip = CommonUtil.getIpAddr(request);
+        String userAgent = request.getHeader("User-Agent");
+
+        String key = "account-service:kaptcha:" + CommonUtil.MD5(ip + userAgent);
+        log.info("验证码key:{}", key);
+        return key;
     }
 
     @RequestMapping("send_code")
