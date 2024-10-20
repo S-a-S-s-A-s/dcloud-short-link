@@ -49,3 +49,11 @@ sms:
   app-code: 19f147c34a974acb845f4ae2f4be90cd
   template-id: 908e94ccf08b4476ba6c876d13f084ad
   sms-sign-id: 2e65b1bb3d054466b82f0c9d125465e2
+
+#阿里云oss配置
+aliyun:
+  oss:
+    endpoint: oss-cn-chengdu.aliyuncs.com
+    access-key-id: LTAI5t6aRGxHN9qyAHHLXqWv
+    access-key-secret: ahMekDoZp1pveQ0LqHChzjD59QsMEl
+    bucket-name: sas-short-link
