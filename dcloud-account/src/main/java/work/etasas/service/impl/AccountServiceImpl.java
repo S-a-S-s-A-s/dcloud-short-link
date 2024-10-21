@@ -17,6 +17,7 @@ import work.etasas.model.LoginUser;
 import work.etasas.service.AccountService;
 import work.etasas.service.NotifyService;
 import work.etasas.util.CommonUtil;
+import work.etasas.util.JWTUtil;
 import work.etasas.util.JsonData;
 
 import java.util.List;
@@ -100,8 +101,10 @@ public class AccountServiceImpl implements AccountService {
                 LoginUser loginUser = LoginUser.builder().build();
                 BeanUtils.copyProperties(accountDO, loginUser);
 
-                //生成TOKEN TODO
-                return JsonData.buildSuccess("");
+                //生成TOKEN
+                String token = JWTUtil.createToken(loginUser);
+
+                return JsonData.buildSuccess(token);
             }else{
                 return JsonData.buildResult(BizCodeEnum.ACCOUNT_PWD_ERROR);
             }
