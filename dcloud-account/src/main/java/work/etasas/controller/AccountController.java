@@ -2,12 +2,12 @@ package work.etasas.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import work.etasas.controller.request.AccountLoginRequest;
+import work.etasas.controller.request.AccountRegisterRequest;
 import work.etasas.enums.BizCodeEnum;
+import work.etasas.service.AccountService;
 import work.etasas.service.FileService;
 import work.etasas.util.JsonData;
 
@@ -26,6 +26,9 @@ public class AccountController {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private AccountService accountService;
+
     /**
      * 上传用户头像 最大默认1M
      * @return
@@ -38,6 +41,29 @@ public class AccountController {
         }else {
             return JsonData.buildResult(BizCodeEnum.FILE_UPLOAD_USER_IMG_FAIL);
         }
+    }
+
+    /**
+     * 用户注册
+     * @param accountRegisterRequest
+     * @return
+     */
+    @PostMapping("register")
+    public  JsonData register(@RequestBody AccountRegisterRequest accountRegisterRequest) {
+
+        JsonData jsonData = accountService.register(accountRegisterRequest);
+        return jsonData;
+    }
+
+    /**
+     * 用户登录
+     * @param accountRegisterRequest
+     * @return
+     */
+    @PostMapping("login")
+    public JsonData login(@RequestBody AccountLoginRequest accountLoginRequest) {
+        return accountService.login(accountLoginRequest);
+
     }
 
 }

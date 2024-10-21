@@ -72,4 +72,25 @@ public class NotifyServiceImpl implements NotifyService {
         redisTemplate.opsForValue().set(cacheKey, value, CODE_EXPIRED, java.util.concurrent.TimeUnit.MILLISECONDS);
         return JsonData.buildSuccess();
     }
+
+    /**
+     * 校验验证码
+     * @param sendCodeEnum
+     * @param to
+     * @param code
+     * @return
+     */
+    @Override
+    public boolean checkCode(SendCodeEnum sendCodeEnum, String to, String code) {
+        String cacheKey = String.format(RedisKey.CHECK_CODE_KEY, sendCodeEnum.name(), to);
+        String cacheValue = redisTemplate.opsForValue().get(cacheKey);
+        if(StringUtil.isNotBlank(cacheValue)) {
+            String cacheCode = cacheValue.split("_")[0];
+            if(cacheCode.equalsIgnoreCase(code)) {
+                redisTemplate.delete(cacheKey);
+                return true;
+            }
+        }
+        return false;
+    }
 }

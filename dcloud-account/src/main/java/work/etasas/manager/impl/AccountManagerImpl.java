@@ -1,10 +1,14 @@
 package work.etasas.manager.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import work.etasas.manager.AccountManager;
-import work.etasas.service.AccountService;
+import work.etasas.mapper.AccountMapper;
+import work.etasas.model.AccountDO;
+
+import java.util.List;
 
 /**
  * @Title: AccountServiceImpl
@@ -15,4 +19,21 @@ import work.etasas.service.AccountService;
 @Component
 @Slf4j
 public class AccountManagerImpl implements AccountManager {
+
+    @Autowired
+    private AccountMapper accountMapper;
+
+    @Override
+    public int insert(AccountDO accountDO) {
+        return accountMapper.insert(accountDO);
+    }
+
+    @Override
+    public List<AccountDO> findByPhone(String phone) {
+
+        List<AccountDO> accountDOList = accountMapper
+                .selectList(new QueryWrapper<AccountDO>().eq("phone", phone));
+
+        return accountDOList;
+    }
 }
