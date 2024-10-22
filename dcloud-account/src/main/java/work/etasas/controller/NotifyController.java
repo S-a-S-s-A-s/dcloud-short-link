@@ -27,7 +27,7 @@ import java.io.IOException;
  * @create 2024-09-15-9:10
  */
 @RestController
-@RequestMapping("/api/account/v1")
+@RequestMapping("/api/notify/v1")
 @Slf4j
 public class NotifyController {
 

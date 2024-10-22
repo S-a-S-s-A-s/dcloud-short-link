@@ -20,7 +20,7 @@ import work.etasas.util.JsonData;
  * @since 2024-09-05
  */
 @RestController
-@RequestMapping("/api/v1/account")
+@RequestMapping("/api/account/v1")
 public class AccountController {
 
     @Autowired
@@ -57,7 +57,7 @@ public class AccountController {
 
     /**
      * 用户登录
-     * @param accountRegisterRequest
+     * @param accountLoginRequest
      * @return
      */
     @PostMapping("login")
