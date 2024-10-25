@@ -17,6 +17,7 @@ import work.etasas.model.LoginUser;
 import work.etasas.service.AccountService;
 import work.etasas.service.NotifyService;
 import work.etasas.util.CommonUtil;
+import work.etasas.util.IdUtil;
 import work.etasas.util.JWTUtil;
 import work.etasas.util.JsonData;
 
@@ -63,8 +64,8 @@ public class AccountServiceImpl implements AccountService {
         //认证级别
         accountDO.setAuth(AuthTypeEnum.DEFAULT.name());
 
-        //生成唯一的账号 TODO
-        accountDO.setAccountNo(CommonUtil.getCurrentTimestamp());
+        //生成唯一的账号
+        accountDO.setAccountNo(Long.valueOf(IdUtil.generateSnowFlakeId().toString()));
 
         //设置盐 密码
         accountDO.setSecret("$1$" + CommonUtil.getStringNumRandom(8));
