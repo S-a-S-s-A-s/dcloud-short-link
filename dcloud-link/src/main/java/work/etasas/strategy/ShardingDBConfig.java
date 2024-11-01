@@ -1,5 +1,8 @@
 package work.etasas.strategy;
 
+import org.apache.commons.math3.util.Pair;
+import work.etasas.util.WeightRandom;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,18 +16,25 @@ public class ShardingDBConfig {
     /**
      * 存储数据库位置编号
      */
-    private static final List<String> dbPrefixList = new ArrayList<>();
+    //private static final List<String> dbPrefixList = new ArrayList<>();
 
     private static Random random = new Random();
 
+    private static List<Pair<String, Integer>> dbPrefixList = new ArrayList<>();
+
+    private static WeightRandom<String, Integer> weightRandom;
+
     static {
-        dbPrefixList.add("0");
-        dbPrefixList.add("1");
-        dbPrefixList.add("a");
+        dbPrefixList.add(new Pair<>("db0", 1));
+        dbPrefixList.add(new Pair<>("db1", 1));
+        dbPrefixList.add(new Pair<>("dba", 1));
+        weightRandom = new WeightRandom<>(dbPrefixList);
     }
 
-    public  static String getDbPrefix() {
-        return dbPrefixList.get(random.nextInt(dbPrefixList.size()));
+    public static String getDbPrefix() {
+        //取最后一位
+        String db = weightRandom.random();
+        return db.substring(db.length() - 1);
     }
 
 
