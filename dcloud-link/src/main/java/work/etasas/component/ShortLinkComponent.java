@@ -1,6 +1,8 @@
 package work.etasas.component;
 
 import org.springframework.stereotype.Component;
+import work.etasas.strategy.ShardingDBConfig;
+import work.etasas.strategy.ShardingTableConfig;
 import work.etasas.util.CommonUtil;
 
 /**
@@ -15,7 +17,9 @@ public class ShortLinkComponent {
     public String generateShortLink(String url) {
         long murmur3_32 = CommonUtil.murmurHash32(url);
         //进制转化
-        return toBase62(murmur3_32);
+        String code = toBase62(murmur3_32);
+        String shortLinkCode = ShardingDBConfig.getDbPrefix() +  code + ShardingTableConfig.getTableSuffix();
+        return shortLinkCode;
     }
 
     private String toBase62(long value) {
