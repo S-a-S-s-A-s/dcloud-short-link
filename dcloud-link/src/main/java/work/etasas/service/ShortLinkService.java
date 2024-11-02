@@ -1,5 +1,7 @@
 package work.etasas.service;
 
+import work.etasas.vo.ShortLinkVO;
+
 /**
  * <p>
  *  服务类
@@ -10,4 +12,5 @@ package work.etasas.service;
  */
 public interface ShortLinkService  {
 
+    ShortLinkVO queryByCode(String shortLinkCode);
 }
