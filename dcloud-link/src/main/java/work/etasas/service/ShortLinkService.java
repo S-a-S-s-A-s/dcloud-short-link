@@ -1,5 +1,7 @@
 package work.etasas.service;
 
+import work.etasas.controller.request.ShortLinkAddRequest;
+import work.etasas.util.JsonData;
 import work.etasas.vo.ShortLinkVO;
 
 /**
@@ -13,4 +15,11 @@ import work.etasas.vo.ShortLinkVO;
 public interface ShortLinkService  {
 
     ShortLinkVO queryByCode(String shortLinkCode);
+
+    /**
+     * 创建短链接
+     * @param request
+     * @return
+     */
+    JsonData createShortLink(ShortLinkAddRequest request);
 }
