@@ -38,6 +38,6 @@ public class ShortLinkAddLinkMQListener {
             throw new BizException(BizCodeEnum.MQ_CONSUME_EXCEPTION);
         }
         log.info("消费成功{}", eventMessage);
-        channel.basicAck(tag, false);
+        //channel.basicAck(tag, false);
     }
 }

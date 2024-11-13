@@ -87,7 +87,7 @@ public enum BizCodeEnum {
      * 数据库相关
      */
     DB_ROUTE_FOUND(800101, "数据库找不到"),
-    MQ_CONSUME_EXCEPTION(900101, "MQ消费异常");
+    MQ_CONSUME_EXCEPTION(900101, "消费者消费异常");
     private String message;
 
     private int code;

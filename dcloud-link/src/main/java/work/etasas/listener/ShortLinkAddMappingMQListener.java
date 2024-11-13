@@ -32,12 +32,12 @@ public class ShortLinkAddMappingMQListener {
             // 2.新增短链映射
             // 3.发送消息
             // 4.手动ack
-
+            int i = 1/0;
         } catch (Exception e) {
             log.error("消费失败{}", eventMessage);
             throw new BizException(BizCodeEnum.MQ_CONSUME_EXCEPTION);
         }
         log.info("消费成功{}", eventMessage);
-        channel.basicAck(tag, false);
+        //channel.basicAck(tag, false);
     }
 }
